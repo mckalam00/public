@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>공새로 90일 실천 사업 전략 (심화판)</title>
+  <style>
+    :root {
+      --primary: #1a56db;
+      --primary-dark: #1042a8;
+      --accent: #f97316;
+      --green: #16a34a;
+      --green-light: #f0fdf4;
+      --red: #dc2626;
+      --purple: #7c3aed;
+      --teal: #0d9488;
+      --gray-50: #f9fafb;
+      --gray-100: #f3f4f6;
+      --gray-200: #e5e7eb;
+      --gray-400: #9ca3af;
+      --gray-600: #4b5563;
+      --gray-800: #1f2937;
+      --gray-900: #111827;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Apple SD Gothic Neo','Noto Sans KR',-apple-system,sans-serif; background: var(--gray-50); color: var(--gray-800); line-height: 1.6; }
+
+    /* ── Header ── */
+    header {
+      background: linear-gradient(135deg,#0f172a 0%,#1e3a8a 60%,#1a56db 100%);
+      color: white; padding: 60px 40px 48px; position: relative; overflow: hidden;
+    }
+    header::before { content:''; position:absolute; top:-60px; right:-60px; width:320px; height:320px; background:rgba(249,115,22,.15); border-radius:50%; }
+    .header-inner { max-width:1100px; margin:0 auto; position:relative; z-index:1; }
+    .header-badge { display:inline-block; background:rgba(249,115,22,.9); color:white; font-size:11px; font-weight:700; letter-spacing:2px; padding:4px 12px; border-radius:20px; margin-bottom:16px; text-transform:uppercase; }
+    header h1 { font-size:42px; font-weight:800; line-height:1.2; margin-bottom:12px; }
+    header h1 span { color:#f97316; }
+    header p.subtitle { font-size:16px; color:rgba(255,255,255,.75); max-width:640px; }
+    .header-meta { margin-top:28px; display:flex; gap:16px; flex-wrap:wrap; }
+    .meta-chip { background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.2); color:rgba(255,255,255,.9); font-size:12px; padding:5px 12px; border-radius:8px; }
+    .agent-badge { background:rgba(124,58,237,.4); border:1px solid rgba(167,139,250,.5); color:#c4b5fd; font-size:11px; padding:4px 10px; border-radius:20px; display:inline-flex; align-items:center; gap:5px; }
+
+    /* ── Layout ── */
+    main { max-width:1100px; margin:0 auto; padding:48px 24px; }
+    .section-label { font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--primary); margin-bottom:8px; }
+    .section-title { font-size:28px; font-weight:800; color:var(--gray-900); margin-bottom:8px; }
+    .section-desc { font-size:15px; color:var(--gray-600); margin-bottom:32px; max-width:680px; }
+    .divider { border:none; border-top:1px solid var(--gray-200); margin:56px 0; }
+
+    /* ── Diagnosis ── */
+    .diagnosis-grid { display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-bottom:48px; }
+    @media(max-width:700px){.diagnosis-grid{grid-template-columns:1fr;}}
+    .diag-card { background:white; border-radius:16px; padding:24px; border:1px solid var(--gray-200); }
+    .diag-card h3 { font-size:14px; font-weight:700; margin-bottom:14px; display:flex; align-items:center; gap:8px; }
+    .diag-card ul { list-style:none; padding:0; }
+    .diag-card ul li { font-size:13.5px; color:var(--gray-600); padding:5px 0; border-bottom:1px solid var(--gray-100); display:flex; align-items:flex-start; gap:8px; }
+    .diag-card ul li:last-child { border-bottom:none; }
+    .dot { width:6px; height:6px; border-radius:50%; flex-shrink:0; margin-top:7px; }
+    .dot-green{background:var(--green);} .dot-red{background:var(--red);} .dot-orange{background:var(--accent);} .dot-blue{background:var(--primary);}
+
+    .opportunity-box { background:linear-gradient(135deg,#eff6ff,#dbeafe); border:1px solid #bfdbfe; border-radius:16px; padding:28px 32px; margin-bottom:48px; }
+    .opportunity-box h3 { font-size:16px; font-weight:700; color:#1e3a8a; margin-bottom:12px; }
+    .opportunity-box p { font-size:15px; color:#1e40af; line-height:1.7; }
+    .stat-row { display:flex; gap:32px; margin-top:20px; flex-wrap:wrap; }
+    .stat-item .num { font-size:28px; font-weight:800; color:var(--primary); }
+    .stat-item .lbl { font-size:12px; color:#3b82f6; margin-top:2px; }
+
+    /* ── Timeline ── */
+    .month-block { display:grid; grid-template-columns:140px 1fr; gap:0; margin-bottom:32px; }
+    @media(max-width:640px){.month-block{grid-template-columns:1fr;}}
+    .month-label { padding-top:4px; padding-right:24px; }
+    .month-badge { display:inline-block; font-size:12px; font-weight:800; padding:4px 12px; border-radius:20px; margin-bottom:4px; }
+    .m1 .month-badge{background:#dbeafe;color:#1d4ed8;} .m2 .month-badge{background:#dcfce7;color:#15803d;} .m3 .month-badge{background:#fef3c7;color:#b45309;}
+    .month-theme { font-size:13px; font-weight:700; color:var(--gray-600); }
+    .month-cards { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:14px; }
+    .task-card { background:white; border-radius:12px; padding:18px 20px; border:1px solid var(--gray-200); }
+    .task-card .tag { font-size:10px; font-weight:700; letter-spacing:1px; text-transform:uppercase; padding:2px 8px; border-radius:4px; margin-bottom:10px; display:inline-block; }
+    .tag-growth{background:#dbeafe;color:#1d4ed8;} .tag-revenue{background:#fef3c7;color:#92400e;} .tag-ops{background:#f3f4f6;color:#4b5563;} .tag-product{background:#f5f3ff;color:#6d28d9;}
+    .task-card h4 { font-size:14px; font-weight:700; color:var(--gray-900); margin-bottom:8px; }
+    .task-card p { font-size:13px; color:var(--gray-600); line-height:1.5; }
+    .task-card .kpi { margin-top:12px; font-size:11.5px; font-weight:700; color:var(--green); background:var(--green-light); padding:4px 8px; border-radius:6px; display:inline-block; }
+
+    /* ── Highlight Box ── */
+    .highlight-box { background:linear-gradient(135deg,#0f172a,#1e3a8a); border-radius:16px; padding:32px; color:white; margin-bottom:48px; }
+    .highlight-box h3 { font-size:18px; font-weight:800; margin-bottom:12px; }
+    .highlight-box p { font-size:14px; color:rgba(255,255,255,.8); line-height:1.7; }
+    .highlight-items { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:16px; margin-top:20px; }
+    .highlight-item { background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.15); border-radius:10px; padding:14px 16px; }
+    .highlight-item .h-num { font-size:26px; font-weight:800; color:#f97316; }
+    .highlight-item .h-lbl { font-size:12px; color:rgba(255,255,255,.7); margin-top:2px; }
+
+    /* ── Agent Insight Section ── */
+    .agent-section-header {
+      display:flex; align-items:center; gap:12px; margin-bottom:32px; flex-wrap:wrap;
+    }
+    .agent-section-header .section-title { margin-bottom:0; }
+    .agent-pill {
+      display:inline-flex; align-items:center; gap:6px;
+      background:#f5f3ff; border:1px solid #c4b5fd; color:#6d28d9;
+      font-size:11px; font-weight:700; padding:4px 12px; border-radius:20px;
+    }
+
+    /* ── Growth Deep-Dive Cards ── */
+    .growth-grid { display:grid; gap:20px; margin-bottom:48px; }
+    .growth-card {
+      background:white; border-radius:16px; border:1px solid var(--gray-200);
+      overflow:hidden;
+    }
+    .growth-card-header {
+      padding:20px 24px 16px;
+      border-bottom:1px solid var(--gray-100);
+      display:flex; align-items:flex-start; justify-content:space-between; gap:12px;
+    }
+    .growth-card-header-left h3 { font-size:17px; font-weight:800; color:var(--gray-900); margin-bottom:6px; }
+    .growth-card-header-left .insight-lead { font-size:13px; color:var(--gray-600); line-height:1.6; max-width:700px; }
+    .growth-card-body { display:grid; grid-template-columns:1fr 1fr; gap:0; }
+    @media(max-width:720px){.growth-card-body{grid-template-columns:1fr;}}
+    .growth-card-actions { padding:20px 24px; border-right:1px solid var(--gray-100); }
+    .growth-card-actions h4 { font-size:12px; font-weight:700; color:var(--primary); letter-spacing:1px; text-transform:uppercase; margin-bottom:12px; }
+    .growth-card-actions ul { list-style:none; padding:0; }
+    .growth-card-actions ul li { font-size:13px; color:var(--gray-600); line-height:1.6; padding:7px 0; border-bottom:1px solid var(--gray-100); display:flex; gap:8px; align-items:flex-start; }
+    .growth-card-actions ul li:last-child { border-bottom:none; }
+    .growth-card-actions ul li::before { content:"→"; color:var(--accent); font-weight:700; flex-shrink:0; margin-top:1px; }
+    .growth-card-metric { padding:20px 24px; display:flex; flex-direction:column; justify-content:center; }
+    .growth-card-metric h4 { font-size:12px; font-weight:700; color:var(--green); letter-spacing:1px; text-transform:uppercase; margin-bottom:12px; }
+    .metric-box { background:var(--green-light); border:1px solid #86efac; border-radius:10px; padding:14px; font-size:13px; color:#166534; line-height:1.6; }
+    .why-box { margin-top:12px; background:#faf5ff; border:1px solid #e9d5ff; border-radius:10px; padding:14px; font-size:12.5px; color:#6b21a8; line-height:1.6; }
+    .why-box strong { display:block; margin-bottom:4px; color:#7c3aed; }
+
+    /* ── Number accent ── */
+    .num-accent { font-size:11px; font-weight:700; background:var(--accent); color:white; width:20px; height:20px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:1px; }
+
+    /* ── Revenue Deep-Dive ── */
+    .rev-layers { display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:20px; margin-bottom:32px; }
+    .rev-layer-card { background:white; border-radius:14px; border:1px solid var(--gray-200); overflow:hidden; }
+    .rev-layer-header { padding:16px 20px; }
+    .rev-layer-header .layer-num { font-size:11px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:6px; }
+    .rev-layer-header h4 { font-size:16px; font-weight:800; color:var(--gray-900); margin-bottom:4px; }
+    .rev-layer-header .layer-pricing { font-size:18px; font-weight:800; }
+    .rev-layer-body { padding:16px 20px; background:var(--gray-50); border-top:1px solid var(--gray-100); }
+    .rev-layer-body p { font-size:12.5px; color:var(--gray-600); line-height:1.6; }
+    .layer-l1 { border-top:3px solid var(--primary); }
+    .layer-l2 { border-top:3px solid var(--green); }
+    .layer-l3 { border-top:3px solid var(--purple); }
+    .layer-l4 { border-top:3px solid var(--accent); }
+
+    /* ── Revenue Mix Chart ── */
+    .rev-mix-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-bottom:32px; }
+    @media(max-width:640px){.rev-mix-grid{grid-template-columns:1fr;}}
+    .rev-mix-card { background:white; border-radius:12px; border:1px solid var(--gray-200); padding:18px 20px; }
+    .rev-mix-card h4 { font-size:13px; font-weight:700; color:var(--gray-700,#374151); margin-bottom:12px; }
+    .mix-bar { margin-bottom:8px; }
+    .mix-bar-label { display:flex; justify-content:space-between; font-size:12px; color:var(--gray-600); margin-bottom:4px; }
+    .mix-bar-track { height:8px; background:var(--gray-100); border-radius:4px; overflow:hidden; }
+    .mix-bar-fill { height:100%; border-radius:4px; }
+
+    /* ── Enterprise Sales ── */
+    .sales-track-grid { display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-bottom:32px; }
+    @media(max-width:640px){.sales-track-grid{grid-template-columns:1fr;}}
+    .sales-track { background:white; border-radius:14px; border:1px solid var(--gray-200); padding:22px 24px; }
+    .sales-track h4 { font-size:15px; font-weight:800; color:var(--gray-900); margin-bottom:14px; display:flex; align-items:center; gap:8px; }
+    .sales-step { padding:10px 0; border-bottom:1px solid var(--gray-100); display:flex; gap:12px; align-items:flex-start; }
+    .sales-step:last-child { border-bottom:none; }
+    .step-badge { width:24px; height:24px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:800; color:white; flex-shrink:0; margin-top:2px; }
+    .sales-step p { font-size:13px; color:var(--gray-600); line-height:1.5; }
+    .sales-step strong { display:block; font-size:13px; color:var(--gray-800); margin-bottom:2px; }
+
+    /* ── Data Moat ── */
+    .moat-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:16px; margin-bottom:32px; }
+    .moat-card { background:white; border-radius:12px; border:1px solid var(--gray-200); padding:18px; text-align:center; }
+    .moat-card .moat-icon { font-size:32px; margin-bottom:10px; }
+    .moat-card h4 { font-size:13px; font-weight:700; color:var(--gray-900); margin-bottom:6px; }
+    .moat-card p { font-size:12px; color:var(--gray-600); line-height:1.5; }
+    .moat-card .moat-num { font-size:22px; font-weight:800; color:var(--purple); margin-top:10px; }
+
+    /* ── Series A ── */
+    .series-a-box { background:linear-gradient(135deg,#1e1b4b,#312e81); border-radius:16px; padding:32px; color:white; margin-bottom:32px; }
+    .series-a-box h3 { font-size:20px; font-weight:800; margin-bottom:8px; }
+    .series-a-box .thesis { font-size:14px; color:rgba(255,255,255,.8); line-height:1.7; margin-bottom:24px; }
+    .series-metrics { display:grid; grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); gap:14px; }
+    .series-metric { background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.15); border-radius:10px; padding:14px; }
+    .series-metric .sm-num { font-size:22px; font-weight:800; color:#a5b4fc; }
+    .series-metric .sm-lbl { font-size:11px; color:rgba(255,255,255,.6); margin-top:4px; }
+    .series-metric .sm-note { font-size:11px; color:rgba(255,255,255,.5); margin-top:2px; }
+
+    /* ── Org Scale ── */
+    .org-timeline { display:grid; grid-template-columns:1fr 1fr 1fr; gap:20px; margin-bottom:32px; }
+    @media(max-width:640px){.org-timeline{grid-template-columns:1fr;}}
+    .org-phase { background:white; border-radius:14px; border:1px solid var(--gray-200); padding:20px; position:relative; }
+    .org-phase .phase-badge { display:inline-block; font-size:11px; font-weight:700; padding:3px 10px; border-radius:12px; margin-bottom:10px; }
+    .org-phase h4 { font-size:14px; font-weight:700; color:var(--gray-900); margin-bottom:12px; }
+    .org-phase ul { list-style:none; padding:0; }
+    .org-phase ul li { font-size:12.5px; color:var(--gray-600); padding:4px 0; border-bottom:1px solid var(--gray-100); display:flex; gap:6px; }
+    .org-phase ul li:last-child { border-bottom:none; }
+    .org-phase ul li::before { content:"•"; color:var(--accent); font-weight:700; }
+
+    /* ── Partnership ── */
+    .partner-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:16px; margin-bottom:32px; }
+    .partner-card { background:white; border-radius:12px; border:1px solid var(--gray-200); padding:20px; }
+    .partner-card .partner-name { font-size:13px; font-weight:800; color:var(--gray-900); margin-bottom:4px; display:flex; align-items:center; gap:8px; }
+    .partner-card .partner-strategy { font-size:12.5px; color:var(--gray-600); line-height:1.5; margin-bottom:10px; }
+    .partner-card .value-tag { font-size:11px; font-weight:700; background:var(--gray-100); color:var(--gray-600); padding:3px 8px; border-radius:6px; display:inline-block; }
+
+    /* ── Global GTM ── */
+    .global-grid { display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-bottom:32px; }
+    @media(max-width:640px){.global-grid{grid-template-columns:1fr;}}
+    .global-card { background:white; border-radius:14px; border:1px solid var(--gray-200); padding:20px; }
+    .global-card h4 { font-size:14px; font-weight:700; color:var(--gray-900); margin-bottom:10px; display:flex; align-items:center; gap:8px; }
+    .global-card p { font-size:13px; color:var(--gray-600); line-height:1.5; }
+    .global-card .gtm-phase { font-size:11px; font-weight:700; background:#dbeafe; color:#1d4ed8; padding:2px 8px; border-radius:4px; }
+
+    /* ── OKR Table ── */
+    .okr-table { width:100%; border-collapse:collapse; background:white; border-radius:16px; overflow:hidden; border:1px solid var(--gray-200); font-size:14px; }
+    .okr-table th { background:var(--gray-900); color:white; padding:12px 16px; text-align:left; font-size:12px; font-weight:700; letter-spacing:1px; }
+    .okr-table td { padding:12px 16px; border-bottom:1px solid var(--gray-100); vertical-align:top; }
+    .okr-table tr:last-child td { border-bottom:none; }
+    .okr-table tr:nth-child(even) td { background:var(--gray-50); }
+    .okr-target { font-weight:700; color:var(--green); }
+
+    /* ── Risk ── */
+    .risk-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:48px; }
+    @media(max-width:640px){.risk-grid{grid-template-columns:1fr;}}
+    .risk-card { background:white; border-radius:12px; padding:20px; border-left:4px solid; border-top:1px solid var(--gray-200); border-right:1px solid var(--gray-200); border-bottom:1px solid var(--gray-200); }
+    .risk-card.high { border-left-color:var(--red); }
+    .risk-card.mid { border-left-color:var(--accent); }
+    .risk-card h4 { font-size:13px; font-weight:700; margin-bottom:6px; color:var(--gray-900); }
+    .risk-card p { font-size:12.5px; color:var(--gray-600); line-height:1.5; }
+    .risk-card .counter { margin-top:10px; background:var(--gray-50); border-radius:8px; padding:10px; font-size:12px; color:var(--gray-600); line-height:1.5; }
+    .risk-card .counter strong { color:var(--gray-800); }
+    .risk-label { font-size:10px; font-weight:700; padding:2px 6px; border-radius:4px; margin-bottom:8px; display:inline-block; }
+    .risk-label.high{background:#fee2e2;color:#b91c1c;} .risk-label.mid{background:#fff7ed;color:#c2410c;}
+
+    /* ── Flywheel ── */
+    .flywheel-steps { display:flex; gap:0; align-items:stretch; margin-bottom:32px; overflow-x:auto; }
+    .flywheel-step { flex:1; min-width:160px; background:white; border:1px solid var(--gray-200); padding:18px 16px; position:relative; text-align:center; }
+    .flywheel-step:not(:last-child)::after { content:"→"; position:absolute; right:-12px; top:50%; transform:translateY(-50%); font-size:18px; color:var(--accent); font-weight:700; z-index:1; background:white; padding:2px; }
+    .flywheel-step:first-child { border-radius:10px 0 0 10px; }
+    .flywheel-step:last-child { border-radius:0 10px 10px 0; }
+    .flywheel-step .fs-icon { font-size:24px; margin-bottom:8px; }
+    .flywheel-step .fs-title { font-size:12px; font-weight:700; color:var(--gray-900); margin-bottom:4px; }
+    .flywheel-step .fs-desc { font-size:11px; color:var(--gray-600); line-height:1.4; }
+
+    /* ── Footer ── */
+    footer { background:var(--gray-900); color:rgba(255,255,255,.6); text-align:center; padding:32px; font-size:13px; }
+    footer strong { color:white; }
+  </style>
+</head>
+<body>
+
+<!-- ════ HEADER ════ -->
+<header>
+  <div class="header-inner">
+    <div class="header-badge">Strategy Report · 2026 · AI-Enhanced</div>
+    <h1>공새로 <span>90일</span> 실천<br>사업 전략 <span style="font-size:24px">심화판</span></h1>
+    <p class="subtitle">그로스 전문 에이전트 + 스케일업 전략 에이전트 분석을 통합한 건설 B2B Marketplace 퀀텀 점프 로드맵</p>
+    <div class="header-meta">
+      <span class="meta-chip">🏗️ 건설 B2B SaaS + Marketplace</span>
+      <span class="meta-chip">📍 POSCO · DL · 호반 · 삼성 POC</span>
+      <span class="agent-badge">🤖 Growth Hacker Agent</span>
+      <span class="agent-badge">🤖 Scale-up Analyst Agent</span>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- ════ 현황 진단 ════ -->
+<section>
+  <div class="section-label">Step 0 · Diagnosis</div>
+  <div class="section-title">현황 진단 &amp; 기회 분석</div>
+  <div class="section-desc">90일 전략 실행 전, 공새로의 현재 위치와 시장 기회를 냉정하게 짚는다.</div>
+
+  <div class="diagnosis-grid">
+    <div class="diag-card">
+      <h3>💪 강점</h3>
+      <ul>
+        <li><span class="dot dot-green"></span>POSCO·DL·호반·삼성·이랜드 메이저 건설사 POC 레퍼런스</li>
+        <li><span class="dot dot-green"></span>고객·공급사·관리자 3-사이드 플랫폼 완성</li>
+        <li><span class="dot dot-green"></span>건설 조달 전 영역 커버 — 자재·장비·잉여자산</li>
+        <li><span class="dot dot-green"></span>KODIT·정부기관 스케일업 지원 네트워크</li>
+        <li><span class="dot dot-green"></span>"수기→디지털" 전환의 명확한 ROI 메시지</li>
+      </ul>
+    </div>
+    <div class="diag-card">
+      <h3>⚠️ 약점</h3>
+      <ul>
+        <li><span class="dot dot-red"></span>GMV·고객 수·공급사 수 등 정량 지표 미공개</li>
+        <li><span class="dot dot-red"></span>요금제 정보 미공개 → 인바운드 자가 전환 불가</li>
+        <li><span class="dot dot-red"></span>POC → 유료 계약 전환 상태 불투명</li>
+        <li><span class="dot dot-red"></span>소셜 프루프 콘텐츠·Case Study 부재</li>
+        <li><span class="dot dot-red"></span>공급사 밀도 미확인 (유동성 리스크)</li>
+      </ul>
+    </div>
+    <div class="diag-card">
+      <h3>🚀 기회</h3>
+      <ul>
+        <li><span class="dot dot-blue"></span>건설 조달 시장 ~120조, 디지털 침투율 5% 미만</li>
+        <li><span class="dot dot-blue"></span>앵커 건설사 1개 = 공급사 200~500개 자동 유입</li>
+        <li><span class="dot dot-blue"></span>ESG·원가 규제 강화 → 투명한 조달 의무화 추세</li>
+        <li><span class="dot dot-blue"></span>잉여자산 역경매·금융 등 인접 수익 레이어</li>
+        <li><span class="dot dot-blue"></span>한국 건설사 해외 현장 → 동남아 진출 교두보</li>
+      </ul>
+    </div>
+    <div class="diag-card">
+      <h3>🌩️ 위협</h3>
+      <ul>
+        <li><span class="dot dot-orange"></span>SAP Ariba·삼성SDS 조달 모듈 확장 압력</li>
+        <li><span class="dot dot-orange"></span>건설사 인하우스 자체 개발 시도</li>
+        <li><span class="dot dot-orange"></span>공급사 가격 투명화 거부 가능성</li>
+        <li><span class="dot dot-orange"></span>건설 경기 하강 시 신규 투자 우선순위 후퇴</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="opportunity-box">
+    <h3>📊 핵심 시장 기회</h3>
+    <p>국내 건설 자재·장비 조달 시장 <strong>80~120조 원</strong>, 디지털 침투율 <strong>&lt;5%</strong>. POSCO처럼 발주처가 공새로로 입찰을 올리는 순간 기존 거래 공급사들은 <em>"등록하지 않으면 입찰 참여 불가"</em> 상황이 된다. 이것이 Coupa·Ariba가 글로벌에서 장악한 강제적 네트워크 효과 메커니즘이다.</p>
+    <div class="stat-row">
+      <div class="stat-item"><div class="num">120조+</div><div class="lbl">국내 건설 조달 시장</div></div>
+      <div class="stat-item"><div class="num">&lt;5%</div><div class="lbl">디지털 침투율</div></div>
+      <div class="stat-item"><div class="num">200~500</div><div class="lbl">앵커 1개사당 자동 유입 공급사</div></div>
+      <div class="stat-item"><div class="num">3-Side</div><div class="lbl">완성 플랫폼 (희귀 자산)</div></div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- ════ 전략 원칙 ════ -->
+<div class="highlight-box">
+  <h3>🎯 90일 핵심 전략 원칙: "POC를 GMV로, GMV를 ARR로"</h3>
+  <p>공새로의 가장 큰 자산은 대형 건설사 POC 레퍼런스다. 그러나 POC는 수익이 아니다. 90일 안에 POC → 유료 계약 → GMV 누적 → ARR + 금융 수익 + 데이터 수익으로 전환하는 <strong>멀티 레이어 Revenue Engine</strong>을 구축하는 것이 최우선이다.</p>
+  <div class="highlight-items">
+    <div class="highlight-item"><div class="h-num">Month 1</div><div class="h-lbl">기반 강화 · POC→계약 전환</div></div>
+    <div class="highlight-item"><div class="h-num">Month 2</div><div class="h-lbl">성장 엔진 가동 · GMV 확대</div></div>
+    <div class="highlight-item"><div class="h-num">Month 3</div><div class="h-lbl">수익 최대화 · Scale-out</div></div>
+    <div class="highlight-item"><div class="h-num">NRR 120%</div><div class="h-lbl">Land &amp; Expand 목표</div></div>
+  </div>
+</div>
+
+<!-- ════ 90일 타임라인 ════ -->
+<section>
+  <div class="section-label">Roadmap · 90 Days</div>
+  <div class="section-title">단계별 실천 액션 플랜</div>
+  <div class="section-desc">각 카드는 즉시 실행 가능한 액션 단위입니다.</div>
+
+  <!-- Month 1 -->
+  <div class="month-block m1">
+    <div class="month-label">
+      <div class="month-badge">Month 1</div>
+      <div class="month-theme">기반 강화<br>+ 전환 집중</div>
+    </div>
+    <div class="month-cards">
+      <div class="task-card"><div class="tag tag-revenue">수익</div><h4>POC 5개사 유료 전환 스프린트</h4><p>각 건설사 담당 KAM 지정, 2주 내 성과 리뷰 미팅 확정. 원가 절감 ROI 보고서(현장 데이터 기반)를 계약 근거로 제시.</p><span class="kpi">목표: 2건+ 유료 계약 전환</span></div>
+      <div class="task-card"><div class="tag tag-revenue">수익</div><h4>3-Tier 요금제 공개 + 셀프 서비스</h4><p>Basic 무료 / Pro 월 150~300만 / Enterprise 500~1,000만. 소규모 현장은 온라인 카드 자가 가입으로 영업 없이 ARR 누적.</p><span class="kpi">목표: 인바운드 자가 신청 월 5건</span></div>
+      <div class="task-card"><div class="tag tag-growth">그로스</div><h4>POSCO 협력사 50개사 강제 온보딩</h4><p>POSCO 계약 시 "전자입찰 전환 SLA" 삽입 → 공급사 일괄 초대 발송 → 48시간 내 자동 온보딩. 닭-달걀 문제를 공급사 선행으로 해결.</p><span class="kpi">목표: 누적 공급사 50개사+</span></div>
+      <div class="task-card"><div class="tag tag-product">제품</div><h4>잉여자재 역경매 무료 PLG 진입점</h4><p>현장 잉여자재를 무료로 올리면 즉시 입찰 가능. "48시간 내 낙찰 보장" SLA로 현장소장의 첫 경험 설계. Bottom-Up 확산의 출발점.</p><span class="kpi">목표: 월 역경매 거래 20건+</span></div>
+      <div class="task-card"><div class="tag tag-ops">운영</div><h4>핵심 지표 대시보드 즉시 구축</h4><p>GMV·MAU·공급사 입찰 참여율·전환율 실시간 추적. CES 내 데이터를 투자자 보고용으로도 정비.</p><span class="kpi">목표: 대시보드 1주 내 가동</span></div>
+      <div class="task-card"><div class="tag tag-growth">그로스</div><h4>원가 절감 Case Study 2개 제작</h4><p>"A현장, 조달비 X% 절감" 구체 수치 포함. 웹사이트·LinkedIn·건설 매체 배포. 내부 챔피언이 본사 보고에 쓸 수 있는 PDF 형태로.</p><span class="kpi">목표: 인바운드 리드 월 10건+</span></div>
+    </div>
+  </div>
+
+  <!-- Month 2 -->
+  <div class="month-block m2">
+    <div class="month-label">
+      <div class="month-badge">Month 2</div>
+      <div class="month-theme">성장 엔진<br>가동</div>
+    </div>
+    <div class="month-cards">
+      <div class="task-card"><div class="tag tag-growth">그로스</div><h4>앵커 네트워크 효과 발동</h4><p>POSCO 계열 현장 온보딩 완료 후 협력 공급사에 "POSCO 현장이 사용 중" 레퍼런스로 접근. 앵커 1개사 = 공급사 150개+ 자동 유입.</p><span class="kpi">목표: 공급사 누적 150개사</span></div>
+      <div class="task-card"><div class="tag tag-revenue">수익</div><h4>구독 + 수수료 하이브리드 수익 구조</h4><p>거래액 0.3~0.8% 수수료 + 월정액 구독 이중 구조 완성. ARPU 30% 상승 목표. ARR 기반 밸류에이션으로 Series A 내러티브 강화.</p><span class="kpi">목표: 평균 ARPU 30% 상승</span></div>
+      <div class="task-card"><div class="tag tag-growth">그로스</div><h4>건설협회·전문 매체 파트너십</h4><p>대한건설협회 공식 추천 디지털 조달 도구 포지셔닝. "디지털 조달 성공 가이드" 백서 배포. 협회 채널 CAC = 광고비 대비 1/10.</p><span class="kpi">목표: 인바운드 리드 월 30건+</span></div>
+      <div class="task-card"><div class="tag tag-product">제품</div><h4>AI 물량산출 Beta 출시</h4><p>도면 → AI 물량 자동 산출. 수작업 30시간 → 1시간 킬러 피처. SelectStar·WeDataLab 협력으로 데이터 파이프라인 구축 가속.</p><span class="kpi">목표: Beta 사용 현장 10개+</span></div>
+      <div class="task-card"><div class="tag tag-growth">그로스</div><h4>입찰 투명성 지수 외부 공개</h4><p>"평균 입찰 경쟁률 X:1, 낙찰가 시장가 대비 Y% 절감" 데이터 공개. CFO·구매팀 대상 콘텐츠로 의사결정권자 공략.</p><span class="kpi">목표: CFO 타겟 리드 미팅 5건</span></div>
+      <div class="task-card"><div class="tag tag-ops">운영</div><h4>공급사 셀프 온보딩 자동화</h4><p>partner.gongsaero.com에서 등록→서류→카탈로그 셀프 완료. 수작업 80% 자동화, 온보딩 소요 시간 24시간 이내 달성.</p><span class="kpi">목표: 온보딩 &lt;24시간</span></div>
+    </div>
+  </div>
+
+  <!-- Month 3 -->
+  <div class="month-block m3">
+    <div class="month-label">
+      <div class="month-badge">Month 3</div>
+      <div class="month-theme">수익 최대화<br>+ Scale-out</div>
+    </div>
+    <div class="month-cards">
+      <div class="task-card"><div class="tag tag-revenue">수익</div><h4>Enterprise 연간 계약 클로징</h4><p>유료 고객 연간 선납 업그레이드. "20% 할인 + 전담 CS" 인센티브. 현금 흐름 안정화 + ARR 지표 확보.</p><span class="kpi">목표: 연간 계약 3건+ 클로징</span></div>
+      <div class="task-card"><div class="tag tag-revenue">수익</div><h4>KODIT 연계 조달 금융 서비스</h4><p>공급사 납품 후 매출채권 선지급 팩토링 서비스. 플랫폼 GMV의 2~3% 금융 마진. KODIT 보증으로 신용 리스크 공유.</p><span class="kpi">목표: 금융 파트너사 1곳 MOU</span></div>
+      <div class="task-card"><div class="tag tag-growth">그로스</div><h4>중견 건설사 PLG 자동 전환 퍼널</h4><p>자가 가입 → 14일 무료 체험 → 유료 전환. 영업팀 없이 중견 이하 고객이 자동 전환하는 Revenue 엔진 완성.</p><span class="kpi">목표: PLG 전환율 15%+</span></div>
+      <div class="task-card"><div class="tag tag-product">제품</div><h4>Gongsaero Price Index (GPI) Beta</h4><p>실거래 기반 자재 시세 인덱스. 기존 공시가 대비 10~30% 정확. 무료 티어(상위 20개 품목) → 유료 구독 전환 퍼널.</p><span class="kpi">목표: GPI Beta 구독 20개사</span></div>
+      <div class="task-card"><div class="tag tag-growth">그로스</div><h4>동남아 파일럿 — 해외 현장 교두보</h4><p>POSCO International 네트워크로 베트남·인도네시아 한국 건설사 해외 현장 파일럿. "한국 건설사 해외 현장 → 현지 건설사" 3단계 GTM.</p><span class="kpi">목표: 해외 파일럿 현장 1개</span></div>
+      <div class="task-card"><div class="tag tag-ops">운영</div><h4>Series A IR Deck + 투자자 미팅</h4><p>GMV·ARR·NRR·공급사 수 90일 데이터로 "건설 조달의 Procore + Stripe" 스토리 구성. Tap Angel·Protech 후속 라운드 논의.</p><span class="kpi">목표: IR Deck 완성 + 미팅 5건</span></div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- ════ 그로스 전략 심화 ════ -->
+<section>
+  <div class="agent-section-header">
+    <div>
+      <div class="section-label">Growth Strategy · Deep Dive</div>
+      <div class="section-title">그로스 전략 심화 분석</div>
+    </div>
+    <span class="agent-pill">🤖 Growth Hacker Agent 분석</span>
+  </div>
+  <div class="section-desc">건설 B2B Marketplace에 특화된 7가지 그로스 메커니즘. 일반론이 아닌 공새로 특화 전술.</div>
+
+  <div class="growth-grid">
+
+    <!-- 1. 바이럴 루프 -->
+    <div class="growth-card">
+      <div class="growth-card-header">
+        <div class="growth-card-header-left">
+          <h3>① 바이럴 루프 &amp; 앵커 네트워크 효과</h3>
+          <p class="insight-lead">건설 B2B 바이럴은 <strong>"강제적 네트워크 참여"</strong> 구조로 설계해야 한다. POSCO가 공새로 포털을 통해 입찰을 올리면 기존 거래 공급사들은 "공새로에 등록하지 않으면 입찰 참여 불가" 상황이 된다. 이것이 공급사 자동 유입의 핵심 트리거다. <strong>건설사 1곳 = 연계 공급사 200~500개사라는 승수 효과</strong>가 발생한다. Coupa·Ariba가 글로벌에서 이 방식으로 시장을 장악했다.</p>
+        </div>
+        <div style="flex-shrink:0;text-align:center;background:#fff7ed;border:1px solid #fed7aa;border-radius:10px;padding:12px 16px;min-width:120px">
+          <div style="font-size:28px;font-weight:800;color:#f97316">150</div>
+          <div style="font-size:11px;color:#9a3412">앵커당 공급사<br>K-Factor 목표</div>
+        </div>
+      </div>
+      <div class="growth-card-body">
+        <div class="growth-card-actions">
+          <h4>실행 액션</h4>
+          <ul>
+            <li>앵커 건설사 계약 시 <strong>"전자입찰 전환 SLA" 조항 삽입</strong> — 6개월 내 조달 물량 70% 이상 공새로 경유 내부 정책화 지원</li>
+            <li>건설사가 기존 거래 공급사 리스트 업로드 → 일괄 초대 발송 → 3단계 온보딩 48시간 내 완료 자동화</li>
+            <li>특정 건설사 지명 초대로 가입 시 <strong>"○○건설 인증 파트너" 배지</strong> 부여 — 공급사 마케팅 자산화</li>
+            <li>크로스 건설사 공급사 중복 활용 — A건설사 등록 공급사가 B건설사 입찰도 볼 수 있는 구조 설계</li>
+            <li>공급사 추천 인센티브 루프 — 등록 공급사가 미등록 공급사 추천 시 수수료 크레딧 제공</li>
+          </ul>
+        </div>
+        <div class="growth-card-metric">
+          <h4>예상 임팩트</h4>
+          <div class="metric-box">앵커 건설사 1개 확보 시 <strong>6개월 내 공급사 300개 이상 자동 유입</strong>, 공급사 온보딩 CAC 0원 달성</div>
+          <div class="why-box"><strong>왜 효과적인가</strong>건설 조달은 '갑을 관계' 구조상 대형 발주처가 공급사 행동을 사실상 강제할 수 있다. 포드·GM이 Ariba를 쓰기 시작하자 전세계 부품사가 강제 온보딩된 것과 동일한 메커니즘.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. PLG -->
+    <div class="growth-card">
+      <div class="growth-card-header">
+        <div class="growth-card-header-left">
+          <h3>② PLG (Product-Led Growth) 진입점 설계</h3>
+          <p class="insight-lead">건설 현장에서 가장 즉각적 Pain Point는 <strong>잉여자재 처리 비용</strong>과 <strong>긴급 자재 수급 지연</strong>이다. 이 두 문제를 무료로 해결해주는 기능이 PLG 훅이 된다. 현장 구매담당자는 의사결정 권한은 제한적이지만, 도구 선택에서 Bottom-Up 영향력이 강하다. Slack이 팀 단위로 퍼진 것과 동일한 메커니즘.</p>
+        </div>
+        <div style="flex-shrink:0;text-align:center;background:#f0fdf4;border:1px solid #86efac;border-radius:10px;padding:12px 16px;min-width:120px">
+          <div style="font-size:28px;font-weight:800;color:#16a34a">15~25%</div>
+          <div style="font-size:11px;color:#166534">PLG 30일 내<br>유료 전환 목표</div>
+        </div>
+      </div>
+      <div class="growth-card-body">
+        <div class="growth-card-actions">
+          <h4>실행 액션</h4>
+          <ul>
+            <li><strong>잉여자재 역경매 무료 오픈</strong> — 현장 남은 자재를 무료로 올리면 주변 건설사·소규모 시공사가 즉시 입찰. 현장소장이 직접 체감하는 PLG 입구</li>
+            <li><strong>무료 긴급 견적 비교 도구</strong> — 품목 입력 시 공급사 3~5개 즉시 견적 24시간 내 제공. 월 5건 이상 사용 시 유료 전환</li>
+            <li>건설 원가 벤치마크 리포트 Freemium — 주요 자재 시세 무료 제공 → 이메일 구독자 → 플랫폼 회원 → 유료 전환 퍼널</li>
+            <li><strong>현장 QR 코드 자재 요청 시스템</strong> — 현장 QR 스캔으로 모바일 자재 부족 알림 발송. 무료 제공 후 예측 발주 AI 기능(유료)으로 전환 유도</li>
+            <li>공급사 카탈로그 무료 등록 + 유료 우선 노출 — 공급망 밀도 먼저 확보 후 건설사 유료화</li>
+          </ul>
+        </div>
+        <div class="growth-card-metric">
+          <h4>예상 임팩트</h4>
+          <div class="metric-box">PLG 진입 후 30일 내 유료 전환율 <strong>15~25%</strong> (B2B SaaS 업계 평균 5~10% 대비 2배). 잉여자재 역경매로 <strong>월 500개 현장 신규 가입</strong> 목표</div>
+          <div class="why-box"><strong>왜 효과적인가</strong>즉각적 원가 절감 가치 때문에 전환율이 높다. "현장에서 편하다"는 입소문이 본사 IT 구매로 이어지는 Bottom-Up 루프 발동.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. Channel Mix -->
+    <div class="growth-card">
+      <div class="growth-card-header">
+        <div class="growth-card-header-left">
+          <h3>③ 채널 믹스 &amp; CAC 최소화</h3>
+          <p class="insight-lead">건설 업계는 디지털 광고 ROI가 극히 낮다. 의사결정자(구매팀장·현장소장·본사 SCM팀)가 LinkedIn이나 검색광고로 SaaS를 도입하는 사례는 드물다. <strong>업계 내 신뢰 네트워크와 정부·협회 채널이 압도적으로 효율적</strong>이다.</p>
+        </div>
+        <div style="flex-shrink:0;text-align:center;background:#eff6ff;border:1px solid #bfdbfe;border-radius:10px;padding:12px 16px;min-width:120px">
+          <div style="font-size:28px;font-weight:800;color:#1d4ed8">1/10</div>
+          <div style="font-size:11px;color:#1e40af">협회 채널 CAC<br>vs 광고 대비</div>
+        </div>
+      </div>
+      <div class="growth-card-body">
+        <div class="growth-card-actions">
+          <h4>채널별 전략</h4>
+          <ul>
+            <li><strong>건설협회·조달청 공식 파트너십</strong> — 대한건설협회, 전문건설협회, 조달청 혁신조달 프로그램 등록. 회원사에게 "공식 추천 디지털 조달 도구"로 포지셔닝</li>
+            <li><strong>POSCO International 협력사 600개사</strong> 타겟 — POSCO계열 협력사를 1차 공급사 온보딩 대상으로 설정. 공문 발송 지원 요청</li>
+            <li>건설 현장 구매팀장 세미나 서킷 — 서울·부산·대구 지역 세미나. 참석자에게 "3개월 무료 체험" 제공. 세미나 1회당 리드 50개, 전환율 30% 목표</li>
+            <li><strong>KODIT 중소 자재업체 DB 활용</strong> — "공새로 등록 시 KODIT 보증 한도 우대 +10~20%" 혜택으로 공급사 CAC 최소화</li>
+            <li>건설 전문 미디어 thought leadership 기고 — 한국건설신문·건설경제에 오피니언 기고. 광고 아닌 신뢰도 구축</li>
+          </ul>
+        </div>
+        <div class="growth-card-metric">
+          <h4>채널 목표</h4>
+          <div class="metric-box">건설사 <strong>CAC $3,000 이하</strong>, 공급사 CAC <strong>$50 이하</strong>. 채널 기여 목표: 파트너십·소개 60% / 이벤트·세미나 25% / 인바운드 콘텐츠 15%</div>
+          <div class="why-box"><strong>왜 효과적인가</strong>건설 업계 의사결정자는 재직 기간이 길고 동종 업계 네트워크 의존도가 높다. "○○건설 SCM팀장이 쓴다"는 한 마디가 수백만 원 광고보다 효과적.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. Growth Hacking -->
+    <div class="growth-card">
+      <div class="growth-card-header">
+        <div class="growth-card-header-left">
+          <h3>④ 건설 B2B 특화 그로스 해킹 전술</h3>
+          <p class="insight-lead">현장 담당자가 "내가 이걸 써서 원가를 X% 절감했다"는 데이터를 본사에 보고하는 순간, <strong>플랫폼 도입의 내부 챔피언</strong>이 된다. 내부 챔피언 1명이 수십억 원 계약을 만든다. 이 메커니즘을 시스템화하는 것이 건설 B2B 그로스 해킹의 핵심.</p>
+        </div>
+      </div>
+      <div class="growth-card-body">
+        <div class="growth-card-actions">
+          <h4>핵심 전술</h4>
+          <ul>
+            <li><strong>원가 절감 실시간 대시보드</strong> — "기존 단가 대비 절감액" 실시간 표시. 현장 담당자가 본사 보고에 활용할 수 있는 원클릭 PDF 리포트 생성. 내부 바이럴의 핵심 트리거</li>
+            <li><strong>경쟁사 ERP 마이그레이션 분석 서비스</strong> — SAP Ariba·삼성SDS 사용 건설사에게 "기존 발주 데이터 3개월 무료 분석" 제공. 분석 리포트 자체가 영업 도구</li>
+            <li>입찰 투명성 지수 공개 — "건설사별 디지털 조달 투명성 지수" 미디어 발표. 공새로 사용 건설사 우위 포지셔닝. ESG 공시와 연계</li>
+            <li>현장소장 카카오 오픈채팅 커뮤니티 침투 — "잉여자재 무료 처리" 콘텐츠로 자연스럽게 진입. 유료 광고 없이 유기적 확산</li>
+            <li>건설사 신입 구매팀 교육 프로그램 — 5년 후 구매팀장이 될 사람에게 먼저 경험 제공</li>
+          </ul>
+        </div>
+        <div class="growth-card-metric">
+          <h4>예상 임팩트</h4>
+          <div class="metric-box">원가 절감 대시보드 도입 후 <strong>내부 챔피언 발생률 40% 향상</strong>. 경쟁사 마이그레이션 분석 서비스로 분기당 전환 건설사 <strong>5개사</strong> 목표</div>
+          <div class="why-box"><strong>왜 효과적인가</strong>건설 업계는 선도 사례의 파급력이 매우 크다. 내부 챔피언 1명 = 전사 계약으로 이어지는 루프가 건설사 특성상 강력하게 작동.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. Retention & NRR -->
+    <div class="growth-card">
+      <div class="growth-card-header">
+        <div class="growth-card-header-left">
+          <h3>⑤ 리텐션 &amp; 확장 수익 — NRR 120%+ 달성</h3>
+          <p class="insight-lead">건설사의 조달은 "현장 단위"로 분산되어 있다. DL이건설의 경우 현장이 수십~수백 개다. <strong>단일 현장 계약 → 전사 확장의 Land &amp; Expand</strong>가 NRR 극대화의 핵심. 프로젝트 데이터가 쌓일수록 전환 비용이 기하급수적으로 높아져 자연 Lock-in이 형성된다.</p>
+        </div>
+        <div style="flex-shrink:0;text-align:center;background:#faf5ff;border:1px solid #e9d5ff;border-radius:10px;padding:12px 16px;min-width:120px">
+          <div style="font-size:22px;font-weight:800;color:#7c3aed">$30K→$300K</div>
+          <div style="font-size:11px;color:#6d28d9">고객당 ARR<br>1년→3년 확장</div>
+        </div>
+      </div>
+      <div class="growth-card-body">
+        <div class="growth-card-actions">
+          <h4>실행 액션</h4>
+          <ul>
+            <li><strong>현장→사업부→전사 확장 로드맵 명시화</strong> — 최초 계약 시 "3개 현장 → 사업부 → 전사" 단계별 플랜을 SCM팀과 공동 수립. 각 단계 KPI 사전 합의</li>
+            <li><strong>ERP 심층 연동으로 워크플로우 내재화</strong> — SAP·더존·영림원 ERP와 API 연동. 공새로 발주가 ERP 구매전표로 자동 생성 → 이탈 불가 구조</li>
+            <li>데이터 Lock-in 설계 — 발주 이력·단가 이력이 3개월+ 축적 시 "내년도 예산 예측 리포트" 자동 생성. 이 데이터 있으면 타 솔루션 이전 비용 매우 높음</li>
+            <li>Upsell 기능 로드맵 — Basic → Pro (원가 분석) → Enterprise (예측 발주 AI) → Finance (조달 금융) 순서. 각 티어 업그레이드 시 절감 효과 배가</li>
+            <li><strong>QBR (분기별 사업 리뷰) 의무화</strong> — 모든 Enterprise 고객에게 절감 성과 리뷰 미팅. 데이터를 고객 내부 보고 자료로 패키징 제공</li>
+          </ul>
+        </div>
+        <div class="growth-card-metric">
+          <h4>예상 임팩트</h4>
+          <div class="metric-box">NRR 목표 <strong>120%</strong>. 현장 1개 계약 → 12개월 내 동일 건설사 내 현장 3개 이상 확장 달성률 <strong>50%</strong></div>
+          <div class="why-box"><strong>왜 효과적인가</strong>건설사 본사 SCM팀은 전사 표준화 압력을 지속적으로 받는다. 현장 2~3개에서 원가 절감 증명이 되면 본사 SCM팀이 자발적으로 전사 도입을 추진한다.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. Reference Flywheel -->
+    <div class="growth-card">
+      <div class="growth-card-header">
+        <div class="growth-card-header-left">
+          <h3>⑥ 레퍼런스 마케팅 플라이휠</h3>
+          <p class="insight-lead">건설 대형사들은 서로를 벤치마킹한다. <strong>"POSCO E&amp;C가 조달 디지털화로 원가 3% 절감"</strong>이라는 사실이 DL이앤씨 CFO 귀에 들어가는 순간, DL 내부에서 "우리도 해야 한다"는 압력이 생긴다. 이 메커니즘은 마케팅으로 작동시켜야 비용 효율이 극대화된다.</p>
+        </div>
+      </div>
+      <!-- Flywheel visual -->
+      <div style="padding:16px 24px 0">
+        <div class="flywheel-steps">
+          <div class="flywheel-step"><div class="fs-icon">🏆</div><div class="fs-title">POSCO 성공</div><div class="fs-desc">공동 케이스 스터디 백서 제작</div></div>
+          <div class="flywheel-step"><div class="fs-icon">📢</div><div class="fs-title">업계 발표</div><div class="fs-desc">컨퍼런스에서 POSCO 구매팀장 발표</div></div>
+          <div class="flywheel-step"><div class="fs-icon">🔥</div><div class="fs-title">DL·현대 FOMO</div><div class="fs-desc">경쟁사 도입 → 자체 도입 압력</div></div>
+          <div class="flywheel-step"><div class="fs-icon">🤝</div><div class="fs-title">SCM 라운드테이블</div><div class="fs-desc">비고객사 초청, 동료 압력</div></div>
+          <div class="flywheel-step"><div class="fs-icon">🏗️</div><div class="fs-title">Tier 1 확산</div><div class="fs-desc">영업 사이클 50% 단축</div></div>
+        </div>
+      </div>
+      <div class="growth-card-body" style="border-top:1px solid var(--gray-100)">
+        <div class="growth-card-actions">
+          <h4>실행 액션</h4>
+          <ul>
+            <li>POSCO와 공동 "건설 조달 디지털 전환 성과 보고서" 작성 — 원가 절감 X%, 처리 시간 Y% 단축 수치 중심</li>
+            <li>건설산업 컨퍼런스 공동 발표 — POSCO 구매팀장이 주인공, 공새로는 Supporting Partner로</li>
+            <li><strong>건설사 SCM 리더 라운드테이블 운영</strong> — 분기 1회 비공개 모임에 비고객사 SCM팀장 2~3명 게스트 초청</li>
+            <li>공급사 레퍼런스 체인 — A건설사 등록 공급사가 B건설사에도 납품 시, B건설사에게 공새로 도입 역으로 요청 유도</li>
+            <li><strong>ESG 조달 투명성 인증 마크</strong> 발급 — 지속가능경영 보고서에 활용 가능한 자산. ESG 공시 의무화 흐름과 연계</li>
+          </ul>
+        </div>
+        <div class="growth-card-metric">
+          <h4>예상 임팩트</h4>
+          <div class="metric-box">레퍼런스 플라이휠 가동 시 <strong>신규 건설사 영업 사이클 50% 단축</strong> (18개월 → 9개월). POSCO 발표 후 6개월 내 DL·현대·GS 등 Tier 1 <strong>3개사 파이프라인 진입</strong></div>
+          <div class="why-box"><strong>왜 효과적인가</strong>건설 업계 톱 레벨 의사결정자들은 동일한 컨퍼런스·골프 네트워크를 공유한다. "경쟁사가 도입했다"는 것이 건설사 경영진에게 가장 강력한 도입 동기.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7. Global GTM -->
+    <div class="growth-card">
+      <div class="growth-card-header">
+        <div class="growth-card-header-left">
+          <h3>⑦ 글로벌 확장 GTM — 동남아 건설시장</h3>
+          <p class="insight-lead">동남아 건설시장은 한국 1990년대 건설 붐과 유사한 성장 단계. 한국 건설사(현대건설·GS건설·삼성물산)의 해외 현장이 첫 번째 교두보가 된다. <strong>"한국 건설사 해외 현장 → 현지 건설사 → 현지 공급망"</strong>으로 확산하는 3단계 GTM이 최적.</p>
+        </div>
+      </div>
+      <div class="growth-card-body">
+        <div class="growth-card-actions">
+          <h4>3단계 GTM</h4>
+          <ul>
+            <li><strong>Stage 1 — 국내 고객사 해외 현장 확장</strong>: 현대건설·GS건설 베트남·인도네시아 현장에 "해외 현장 조달 모듈" 추가 계약. 영어·베트남어·인도네시아어 지원. 해외 영업팀 없이 진입</li>
+            <li><strong>Stage 2 — POSCO International 네트워크 활용</strong>: 동남아 철강 유통 네트워크를 공새로 첫 번째 현지 공급사 풀로 통합. 현지 공급사 100개사 선온보딩 후 현지 건설사 어필</li>
+            <li><strong>Stage 3 — 현지 파트너와 화이트라벨</strong>: 베트남·인도네시아 현지 건설 테크 스타트업과 파트너십. 공새로 플랫폼 현지 브랜드로 화이트라벨 공급</li>
+            <li>KOICA ODA 연계 디지털 조달 프로젝트 수주 — 정부 예산으로 현지 구축 후 건설부 MOU</li>
+            <li>베트남 Vietbuild, 인도네시아 IndoBuildTech 참가 — POSCO·DL 한국 레퍼런스로 현지 신뢰 확보</li>
+          </ul>
+        </div>
+        <div class="growth-card-metric">
+          <h4>예상 임팩트</h4>
+          <div class="metric-box"><strong>18개월 내</strong> 베트남 한국 건설사 현장 10개, 현지 공급사 500개 등록. <strong>3년 내 GMV 동남아 $50M</strong>. 현지화 CAC = 국내 대비 30% 낮게 유지</div>
+          <div class="why-box"><strong>왜 효과적인가</strong>한국 건설사들이 동남아에서 발주하는 규모가 연간 수조 원. 본사에서 쓰는 툴을 해외 현장에도 적용하는 수요가 존재 — 해외 영업팀 없이 진입 가능.</div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /growth-grid -->
+</section>
+
+<hr class="divider" />
+
+<!-- ════ 스케일업 & 수익 심화 ════ -->
+<section>
+  <div class="agent-section-header">
+    <div>
+      <div class="section-label">Scale-up · Revenue Maximization</div>
+      <div class="section-title">스케일업 &amp; 수익 최대화 심화</div>
+    </div>
+    <span class="agent-pill">🤖 Scale-up Analyst Agent 분석</span>
+  </div>
+  <div class="section-desc">수익 모델 최적화 · 엔터프라이즈 세일즈 · 데이터 해자 · Series A 스토리 · 조직 스케일업</div>
+
+  <!-- 수익 모델 -->
+  <div class="section-label" style="margin-top:0">Revenue Model · 4-Layer Stack</div>
+  <h3 style="font-size:20px;font-weight:700;color:var(--gray-900);margin-bottom:8px">수익 모델 최적화</h3>
+  <p style="font-size:14px;color:var(--gray-600);margin-bottom:20px">건설 조달의 "낮은 마진·높은 볼륨" 특성을 이용해 거래 수수료로 진입 장벽을 낮추고, SaaS·데이터·금융으로 마진을 단계적으로 끌어올리는 4-Layer Revenue Stack.</p>
+
+  <div class="rev-layers">
+    <div class="rev-layer-card layer-l1">
+      <div class="rev-layer-header">
+        <div class="layer-num" style="color:var(--primary)">LAYER 1 · 진입</div>
+        <h4>거래 수수료</h4>
+        <div class="layer-pricing" style="color:var(--primary)">GMV × 0.3~0.8%</div>
+      </div>
+      <div class="rev-layer-body">
+        <p>기존 중개 수수료(1~3%)의 1/3 이하로 포지셔닝. 초기 6개월 수수료 면제(Free GMV Period)로 거래 데이터 확보 집중. 연간 자재비 500억 기준 건설사 절감액 3.5~8.5억 원.</p>
+      </div>
+    </div>
+    <div class="rev-layer-card layer-l2">
+      <div class="rev-layer-header">
+        <div class="layer-num" style="color:var(--green)">LAYER 2 · 고정 수익</div>
+        <h4>SaaS 구독</h4>
+        <div class="layer-pricing" style="color:var(--green)">월 150~1,000만 원/사</div>
+      </div>
+      <div class="rev-layer-body">
+        <p><strong>Basic</strong> 무료 (기본 발주 관리) · <strong>Pro</strong> 월 150~300만 (AI 단가 분석·자동 발주·대시보드) · <strong>Enterprise</strong> 월 500~1,000만 (ERP 연동·커스텀 리포트·전담 CSM). POC 성공 고객 12개월 계약 시 20% 할인.</p>
+      </div>
+    </div>
+    <div class="rev-layer-card layer-l3">
+      <div class="rev-layer-header">
+        <div class="layer-num" style="color:var(--purple)">LAYER 3 · 고마진</div>
+        <h4>데이터 서비스</h4>
+        <div class="layer-pricing" style="color:var(--purple)">월 200~500만 원</div>
+      </div>
+      <div class="rev-layer-body">
+        <p><strong>GPI (Gongsaero Price Index)</strong> 월간 리포트 구독. 공급업체 신용·납품 이행 스코어링 API. 수요 예측 대시보드. 한계비용 0에 수렴 → <strong>마진 85%+</strong>.</p>
+      </div>
+    </div>
+    <div class="rev-layer-card layer-l4">
+      <div class="rev-layer-header">
+        <div class="layer-num" style="color:var(--accent)">LAYER 4 · 수익 극대화</div>
+        <h4>조달 금융</h4>
+        <div class="layer-pricing" style="color:var(--accent)">거래액 × 2~3%</div>
+      </div>
+      <div class="rev-layer-body">
+        <p>KODIT 보증 연계 공급업체 조기 결제(Early Payment). 납품 후 60~120일 대기를 단축, 연 8~12% 할인율로 수수료 확보. B2B BNPL 모델로 발주처 현금흐름 부담 완화. Levelset 성공 모델 벤치마크.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Revenue Mix -->
+  <div class="rev-mix-grid">
+    <div class="rev-mix-card">
+      <h4>Year 1 수익 구성</h4>
+      <div class="mix-bar"><div class="mix-bar-label"><span>수수료</span><span>70%</span></div><div class="mix-bar-track"><div class="mix-bar-fill" style="width:70%;background:var(--primary)"></div></div></div>
+      <div class="mix-bar"><div class="mix-bar-label"><span>SaaS</span><span>25%</span></div><div class="mix-bar-track"><div class="mix-bar-fill" style="width:25%;background:var(--green)"></div></div></div>
+      <div class="mix-bar"><div class="mix-bar-label"><span>금융</span><span>5%</span></div><div class="mix-bar-track"><div class="mix-bar-fill" style="width:5%;background:var(--accent)"></div></div></div>
+    </div>
+    <div class="rev-mix-card">
+      <h4>Year 2 수익 구성</h4>
+      <div class="mix-bar"><div class="mix-bar-label"><span>수수료</span><span>45%</span></div><div class="mix-bar-track"><div class="mix-bar-fill" style="width:45%;background:var(--primary)"></div></div></div>
+      <div class="mix-bar"><div class="mix-bar-label"><span>SaaS</span><span>30%</span></div><div class="mix-bar-track"><div class="mix-bar-fill" style="width:30%;background:var(--green)"></div></div></div>
+      <div class="mix-bar"><div class="mix-bar-label"><span>데이터</span><span>10%</span></div><div class="mix-bar-track"><div class="mix-bar-fill" style="width:10%;background:var(--purple)"></div></div></div>
+      <div class="mix-bar"><div class="mix-bar-label"><span>금융</span><span>15%</span></div><div class="mix-bar-track"><div class="mix-bar-fill" style="width:15%;background:var(--accent)"></div></div></div>
+    </div>
+    <div class="rev-mix-card">
+      <h4>Year 3 수익 구성 (목표)</h4>
+      <div class="mix-bar"><div class="mix-bar-label"><span>수수료</span><span>30%</span></div><div class="mix-bar-track"><div class="mix-bar-fill" style="width:30%;background:var(--primary)"></div></div></div>
+      <div class="mix-bar"><div class="mix-bar-label"><span>SaaS</span><span>25%</span></div><div class="mix-bar-track"><div class="mix-bar-fill" style="width:25%;background:var(--green)"></div></div></div>
+      <div class="mix-bar"><div class="mix-bar-label"><span>데이터</span><span>15%</span></div><div class="mix-bar-track"><div class="mix-bar-fill" style="width:15%;background:var(--purple)"></div></div></div>
+      <div class="mix-bar"><div class="mix-bar-label"><span>금융</span><span>30%</span></div><div class="mix-bar-track"><div class="mix-bar-fill" style="width:30%;background:var(--accent)"></div></div></div>
+    </div>
+  </div>
+
+  <!-- 엔터프라이즈 세일즈 -->
+  <div class="section-label" style="margin-top:40px">Enterprise Sales</div>
+  <h3 style="font-size:20px;font-weight:700;color:var(--gray-900);margin-bottom:8px">엔터프라이즈 세일즈 전략</h3>
+  <p style="font-size:14px;color:var(--gray-600);margin-bottom:20px">Bottom-Up(현장 Pain → 내부 챔피언)과 Top-Down(CFO 스폰서십)을 동시에 진행하는 듀얼 트랙 세일즈.</p>
+
+  <div class="sales-track-grid">
+    <div class="sales-track">
+      <h4>📍 Bottom-Up 침투 (Land)</h4>
+      <div class="sales-step">
+        <div class="step-badge" style="background:var(--primary)">1</div>
+        <div><strong>현장 Pain Point 해소</strong><p>단가 비교 수작업·공급업체 탐색 시간·발주서 관리 등 즉각적 해소. 단일 현장·단일 공종에서 POC 시작.</p></div>
+      </div>
+      <div class="sales-step">
+        <div class="step-badge" style="background:var(--primary)">2</div>
+        <div><strong>내부 챔피언 육성</strong><p>3개월 내 원가 절감 효과(시간 -40%, 단가 -5~10%) 정량 증명. 현장 담당자가 본사에 보고할 수 있는 Before/After 데이터 패키징.</p></div>
+      </div>
+      <div class="sales-step">
+        <div class="step-badge" style="background:var(--primary)">3</div>
+        <div><strong>멀티스레딩</strong><p>타겟 건설사 내 구매팀장·IT팀·현장소장 3곳 이상 접점 확보. 챔피언이 이직해도 관계 유지.</p></div>
+      </div>
+    </div>
+    <div class="sales-track">
+      <h4>📊 Top-Down 스폰서십 (Expand)</h4>
+      <div class="sales-step">
+        <div class="step-badge" style="background:var(--accent)">1</div>
+        <div><strong>CFO에게 경영 언어로</strong><p>"조달 비용 5~10% 절감 = 연간 XX억 원" ROI. CPO에게는 "공급망 투명성·ESG 감사 대응력 강화" 포지셔닝.</p></div>
+      </div>
+      <div class="sales-step">
+        <div class="step-badge" style="background:var(--accent)">2</div>
+        <div><strong>C-Level 라운드테이블</strong><p>건설사 3~5개 CFO 정기 모임 개최. 경쟁사 도입 FOMO 활용. 업계 네트워크 효과로 세일즈 가속.</p></div>
+      </div>
+      <div class="sales-step">
+        <div class="step-badge" style="background:var(--accent)">3</div>
+        <div><strong>3단계 계약 구조</strong><p>① 단일 현장 POC → ② 3~5개 현장 파일럿 → ③ 전사 MSA. 각 단계마다 KPI 사전 합의로 확장 명분 내부 생성.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 데이터 해자 -->
+  <div class="section-label" style="margin-top:40px">Data Moat</div>
+  <h3 style="font-size:20px;font-weight:700;color:var(--gray-900);margin-bottom:8px">데이터 해자 구축</h3>
+  <p style="font-size:14px;color:var(--gray-600);margin-bottom:20px">건설 자재 거래의 "가격 불투명성"을 해소하는 독점적 데이터셋 축적. 경쟁자가 돈으로 살 수 없는 시간적 해자.</p>
+
+  <div class="moat-grid">
+    <div class="moat-card">
+      <div class="moat-icon">📊</div>
+      <h4>Gongsaero Price Index</h4>
+      <p>주요 자재 100개 품목 실거래 기반 시세 인덱스. 기존 공시가 대비 10~30% 정확. 업계 표준이 되면 공새로 없이 예산 수립 불가.</p>
+      <div class="moat-num">100개 품목</div>
+    </div>
+    <div class="moat-card">
+      <div class="moat-icon">⭐</div>
+      <h4>Supplier Trust Score</h4>
+      <p>납기 준수율·품질 클레임·가격 안정성·거래 이력 기반 공급업체 스코어링. KODIT 신용과 통합 평가. "공새로 인증 공급업체" 우선 선택 구조.</p>
+      <div class="moat-num">1,000개사+</div>
+    </div>
+    <div class="moat-card">
+      <div class="moat-icon">🧠</div>
+      <h4>수요 예측 모델</h4>
+      <p>건설 착공 허가 데이터 + 공새로 발주 데이터 결합. 공급업체에게 "3개월 후 철근 수요 XX톤 예상" 인사이트 제공 → 양면 의존성 강화.</p>
+      <div class="moat-num">WeDataLab 협력</div>
+    </div>
+    <div class="moat-card">
+      <div class="moat-icon">🔒</div>
+      <h4>거래 데이터 Lock-in</h4>
+      <p>정규화된 거래 레코드 12개월 내 50만 건+ 목표. 데이터가 쌓일수록 경쟁자 진입이 어려워지는 시간적 해자. 3~5년 선점 우위.</p>
+      <div class="moat-num">50만 건+ 목표</div>
+    </div>
+  </div>
+
+  <!-- Series A -->
+  <div class="section-label" style="margin-top:40px">Series A Story</div>
+  <div class="series-a-box">
+    <h3>🚀 공새로 Series A 스토리: "건설 조달의 Procore + Stripe"</h3>
+    <p class="thesis">Shopify가 소매 커머스를 민주화했듯, 공새로는 건설 조달을 민주화한다. 거래 수수료(Payments) → SaaS(Software) → 데이터(Intelligence) → 금융(Capital)의 4-layer 수익 확장이 Shopify 경로와 동일. 건설업은 GDP 대비 IT 투자 최하위 산업으로 디지털 전환 잠재력이 가장 크다.</p>
+    <div class="series-metrics">
+      <div class="series-metric"><div class="sm-num">50~100억</div><div class="sm-lbl">Series A 목표 조달액</div><div class="sm-note">Tap Angel·Protech 후속 라운드</div></div>
+      <div class="series-metric"><div class="sm-num">300~500억</div><div class="sm-lbl">목표 밸류에이션</div><div class="sm-note">ARR 60~100x (Vertical SaaS 멀티플)</div></div>
+      <div class="series-metric"><div class="sm-num">월 GMV 100억+</div><div class="sm-lbl">Round-Ready 핵심 지표</div><div class="sm-note">MoM 성장률 15%+</div></div>
+      <div class="series-metric"><div class="sm-num">NRR 120%+</div><div class="sm-lbl">Land &amp; Expand 검증</div><div class="sm-note">Tier 1 건설사 2개+ 계약</div></div>
+      <div class="series-metric"><div class="sm-num">ARR 5억+</div><div class="sm-lbl">반복 수익 기반</div><div class="sm-note">CAC 회수 12개월 이내</div></div>
+    </div>
+  </div>
+
+  <!-- 조직 스케일업 -->
+  <div class="section-label" style="margin-top:40px">Org Scale-up</div>
+  <h3 style="font-size:20px;font-weight:700;color:var(--gray-900);margin-bottom:8px">90일 조직 스케일업 로드맵</h3>
+  <p style="font-size:14px;color:var(--gray-600);margin-bottom:20px">POC 성공을 반복 가능한 엔터프라이즈 세일즈 머신으로 전환. 세일즈 + 프로덕트 + CS의 3-Pillar 조직.</p>
+
+  <div class="org-timeline">
+    <div class="org-phase">
+      <div class="phase-badge" style="background:#dbeafe;color:#1d4ed8">Day 1–30 · 기반 구축</div>
+      <h4>핵심 인력 확보 &amp; 프로세스</h4>
+      <ul>
+        <li>엔터프라이즈 AE 2명 (건설업계 네트워크 보유자 필수)</li>
+        <li>고객 성공 매니저 1명 (건설 현장 경험자)</li>
+        <li>풀스택 엔지니어 2명 (금융 인프라 경험)</li>
+        <li>CRM(HubSpot) 도입 + 파이프라인 체계</li>
+        <li>세일즈 플레이북 v1 작성</li>
+      </ul>
+    </div>
+    <div class="org-phase">
+      <div class="phase-badge" style="background:#dcfce7;color:#15803d">Day 31–60 · 가동</div>
+      <h4>세일즈 파이프라인 + 제품 강화</h4>
+      <ul>
+        <li>Tier 1 건설사 5개 타겟 접촉 시작</li>
+        <li>POC 고객 유료 전환 완료</li>
+        <li>SaaS Pro 티어 출시 + 가격 테스트</li>
+        <li>데이터 엔지니어 1명 (거래 데이터 파이프라인)</li>
+        <li>BD 매니저 1명 (파트너십 전담)</li>
+      </ul>
+    </div>
+    <div class="org-phase">
+      <div class="phase-badge" style="background:#fef3c7;color:#b45309">Day 61–90 · 확장 준비</div>
+      <h4>반복 가능성 검증 + IR</h4>
+      <ul>
+        <li>두 번째 Tier 1 POC 시작</li>
+        <li>KODIT 금융 서비스 파일럿 런칭</li>
+        <li>GPI Beta 출시</li>
+        <li>Series A 피칭 자료 완성</li>
+        <li>투자자 미팅 시작</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 파트너십 레버리지 -->
+  <div class="section-label" style="margin-top:40px">Partnership Leverage</div>
+  <h3 style="font-size:20px;font-weight:700;color:var(--gray-900);margin-bottom:8px">파트너십 레버리지</h3>
+  <p style="font-size:14px;color:var(--gray-600);margin-bottom:20px">파트너십을 "신뢰 프록시(Trust Proxy)"로 활용. 스타트업 단독으로는 불가능한 대기업 문턱을 넘고 금융 서비스 진입 장벽을 우회한다.</p>
+
+  <div class="partner-grid">
+    <div class="partner-card">
+      <div class="partner-name">🏦 KODIT (신용보증기금)</div>
+      <div class="partner-strategy">공새로 거래 데이터 기반 "건설 공급업체 신용평가 모델" 공동 개발. 공새로 등록 공급업체에게 KODIT 보증 한도 우대 +10~20%. 중장기: 공새로 자체 보증 상품 설계 시 KODIT 재보증 구조.</div>
+      <span class="value-tag">Lock-in 효과</span> <span class="value-tag">금융 신뢰도</span>
+    </div>
+    <div class="partner-card">
+      <div class="partner-name">🏗️ POSCO International</div>
+      <div class="partner-strategy">포스코 그룹 건설 자재(철강·레미콘) 조달 채널로 공새로 활용 → 포스코이앤씨 자연 진입. POSCO International 글로벌 소싱 네트워크를 공급업체 풀에 통합 → 해외 직소싱 기능 차별화.</div>
+      <span class="value-tag">Tier 1 진입</span> <span class="value-tag">글로벌 공급망</span>
+    </div>
+    <div class="partner-card">
+      <div class="partner-name">🏛️ 조달청·국토부</div>
+      <div class="partner-strategy">조달청 나라장터 연동 API → 공공 건설 프로젝트 조달 확장. 중기부 "스마트 건설" 정책 과제 수주 → 정부 R&amp;D 자금 + 정책 레퍼런스. 건설 조달 디지털화 정책 프레임워크 형성 참여.</div>
+      <span class="value-tag">공공시장 접근</span> <span class="value-tag">규제 정당성</span>
+    </div>
+    <div class="partner-card">
+      <div class="partner-name">🤖 SelectStar · WeDataLab</div>
+      <div class="partner-strategy">SelectStar: 자재 이미지·문서 데이터 라벨링 → AI 자재 자동 분류·견적 자동화 모델 학습. WeDataLab: 건설 빅데이터 분석 → 수요 예측·가격 변동 예측 모델 → 데이터 서비스(Layer 3) 상품화 가속.</div>
+      <span class="value-tag">AI 역량</span> <span class="value-tag">데이터 상품</span>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- ════ OKR ════ -->
+<section>
+  <div class="section-label">OKR · Key Results</div>
+  <div class="section-title">90일 핵심 성과 지표</div>
+  <div class="section-desc">매주 리뷰, 월별 전략 조정. 아래 지표 중 2개 이상 달성 시 Series A 내러티브 구성 가능.</div>
+
+  <table class="okr-table" style="margin-bottom:48px">
+    <thead>
+      <tr><th>카테고리</th><th>핵심 지표 (KR)</th><th>Month 1</th><th>Month 2</th><th>Month 3 (90일 목표)</th></tr>
+    </thead>
+    <tbody>
+      <tr><td style="font-weight:700;color:var(--accent)">수익</td><td>유료 계약 고객사 수</td><td>2개사</td><td>5개사</td><td class="okr-target">10개사+</td></tr>
+      <tr><td style="font-weight:700;color:var(--accent)">수익</td><td>월 반복 수익 (MRR)</td><td>500만 원</td><td>1,500만 원</td><td class="okr-target">3,000만 원+</td></tr>
+      <tr><td style="font-weight:700;color:var(--primary)">그로스</td><td>등록 공급사 수 (누적)</td><td>50개사</td><td>150개사</td><td class="okr-target">300개사+</td></tr>
+      <tr><td style="font-weight:700;color:var(--primary)">그로스</td><td>월 플랫폼 GMV</td><td>2억 원</td><td>5억 원</td><td class="okr-target">10억 원+</td></tr>
+      <tr><td style="font-weight:700;color:var(--purple)">제품</td><td>월 활성 현장 수 (MAU)</td><td>10개</td><td>25개</td><td class="okr-target">50개+</td></tr>
+      <tr><td style="font-weight:700;color:var(--purple)">제품</td><td>입찰 참여 공급사 비율</td><td>30%</td><td>45%</td><td class="okr-target">60%+</td></tr>
+      <tr><td style="font-weight:700;color:var(--teal)">파이프라인</td><td>월 인바운드 리드 수</td><td>10건</td><td>30건</td><td class="okr-target">60건+</td></tr>
+      <tr><td style="font-weight:700;color:var(--teal)">파이프라인</td><td>POC→유료 전환율</td><td>40%</td><td>60%</td><td class="okr-target">80%+</td></tr>
+      <tr><td style="font-weight:700;color:var(--green)">스케일업</td><td>Net Revenue Retention (NRR)</td><td>—</td><td>105%</td><td class="okr-target">120%+</td></tr>
+      <tr><td style="font-weight:700;color:var(--green)">스케일업</td><td>Series A 투자자 미팅</td><td>—</td><td>3건</td><td class="okr-target">5건+, 텀싯 1개</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<hr class="divider" />
+
+<!-- ════ 리스크 관리 ════ -->
+<section>
+  <div class="section-label">Risk Management</div>
+  <div class="section-title">리스크 &amp; 대응 전략</div>
+  <div class="section-desc">에이전트 분석에서 발굴된 주요 리스크와 선제적 대응 방안.</div>
+
+  <div class="risk-grid">
+    <div class="risk-card high">
+      <div class="risk-label high">고위험 · 즉시 대응</div>
+      <h4>공급사 밀도 부족 → 플랫폼 가치 붕괴</h4>
+      <p>건설사가 입찰을 올렸는데 응찰 공급사가 없으면 플랫폼 가치가 소멸한다. <strong>공급사:건설사 비율 최소 50:1 유지 필수.</strong> 공급사 온보딩이 건설사 확장보다 반드시 선행되어야 한다.</p>
+      <div class="counter"><strong>대응:</strong> POSCO 협력사 리스트 활용 강제 온보딩. 공급사 수 주간 모니터링. 비율 위험 시 건설사 확장 속도 조절.</div>
+    </div>
+    <div class="risk-card high">
+      <div class="risk-label high">고위험 · 즉시 대응</div>
+      <h4>POC → 계약 전환 실패</h4>
+      <p>건설사 내부 예산 동결·조달 시스템 교체 저항으로 계약 지연 가능. 현장 담당자의 의사결정 권한이 제한적인 경우 치명적.</p>
+      <div class="counter"><strong>대응:</strong> Multi-threading 영업 (현장→구매팀→CFO). ROI 정량화 보고서 + CFO 언어로 소통. 분기말 예산 집행 시기 맞춤 프로모션.</div>
+    </div>
+    <div class="risk-card mid">
+      <div class="risk-label mid">중위험</div>
+      <h4>대기업 자체 개발 / 아이디어 복제</h4>
+      <p>POC 성공 후 대형 건설사가 공새로 아이디어를 내부 솔루션으로 개발하는 시나리오. SAP Ariba 모듈 강화 압력.</p>
+      <div class="counter"><strong>대응:</strong> 거래 데이터 Lock-in 강화 (3개월+ 데이터 축적 후 이전 비용 급등). 중소형 전문건설사 세그먼트 선점. GPI 데이터 해자로 차별화.</div>
+    </div>
+    <div class="risk-card mid">
+      <div class="risk-label mid">중위험</div>
+      <h4>건설 경기 하강</h4>
+      <p>금리 상승·PF 경색으로 신규 현장 감소 시 GMV 정체 가능. 신규 IT 투자 우선순위 하락.</p>
+      <div class="counter"><strong>대응:</strong> "불황기 원가 절감 도구" 포지셔닝 전환 (경기 하강 시 조달비 절감 니즈 증가). 금융 서비스는 불황 헤지 (운전자금 부족 시 수요↑). 현금 런웨이 18개월+ 유지.</div>
+    </div>
+    <div class="risk-card mid">
+      <div class="risk-label mid">중위험</div>
+      <h4>공급사 가격 투명화 거부</h4>
+      <p>가격 불투명성이 공급업체의 마진 원천인 경우 플랫폼 참여를 꺼릴 수 있다. 공급사 이탈 시 유동성 감소.</p>
+      <div class="counter"><strong>대응:</strong> "KODIT 보증 우대" 인센티브로 투명화 참여 동기 부여. Supplier Trust Score로 투명한 공급사에게 우선 노출 혜택. 공급사 카탈로그 무료 + 유료 노출 강화 구조.</div>
+    </div>
+    <div class="risk-card mid">
+      <div class="risk-label mid">검증 필요 가정</div>
+      <h4>에이전트가 지적한 미검증 가정</h4>
+      <p>① 건설사가 0.3~0.8% 수수료를 수용할 것이라는 가정 (직접 거래 관행 존재 시 저항 가능) ② KODIT 데이터 기반 보증 승인 가정 ③ 건설 자재 데이터 표준화가 기술적으로 가능하다는 가정 (규격 극도 비표준)</p>
+      <div class="counter"><strong>대응:</strong> 고객 인터뷰·POC 데이터로 각 가정을 90일 내 검증. 가정이 틀릴 경우 즉시 피봇 가능한 구조 유지.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ 즉시 실행 Top 5 ════ -->
+<section style="margin-bottom:48px">
+  <div class="section-label">Execute Now</div>
+  <div class="section-title">지금 당장 해야 할 Top 5</div>
+  <div class="section-desc">에이전트 분석의 공통 최우선 과제. 이 5가지가 다른 모든 그로스 채널의 레버를 동시에 당긴다.</div>
+
+  <div class="diagnosis-grid">
+    <div class="diag-card">
+      <h3>🔥 Week 1~2 즉시 실행</h3>
+      <ul>
+        <li><span style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;background:var(--red);color:white;border-radius:50%;font-size:11px;font-weight:700;flex-shrink:0">1</span>POSCO POC를 유료 계약으로 전환 + POSCO 구매팀장의 업계 컨퍼런스 발표 기획 동시 진행 <em>(레퍼런스 플라이휠 점화)</em></li>
+        <li><span style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;background:var(--red);color:white;border-radius:50%;font-size:11px;font-weight:700;flex-shrink:0">2</span>웹사이트 3-Tier 가격 정보 즉시 공개 <em>(인바운드 전환율 즉시 개선)</em></li>
+        <li><span style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;background:var(--red);color:white;border-radius:50%;font-size:11px;font-weight:700;flex-shrink:0">3</span>공급사 온보딩 선행 — POSCO 협력사 50개사 리스트 확보 후 강제 온보딩 시작 <em>(공급사:건설사 비율 50:1 유지)</em></li>
+        <li><span style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;background:var(--red);color:white;border-radius:50%;font-size:11px;font-weight:700;flex-shrink:0">4</span>원가 절감 대시보드 + 원클릭 PDF 리포트 기능 구현 <em>(내부 챔피언 자동 생성 트리거)</em></li>
+        <li><span style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;background:var(--red);color:white;border-radius:50%;font-size:11px;font-weight:700;flex-shrink:0">5</span>잉여자재 역경매 무료 PLG 진입점 즉시 런칭 <em>(Bottom-Up 확산 시작)</em></li>
+      </ul>
+    </div>
+    <div class="diag-card">
+      <h3>🎯 90일 후 반드시 갖춰야 할 것</h3>
+      <ul>
+        <li><span class="dot dot-blue"></span>유료 계약 고객사 10개+ · MRR 3,000만 원 · NRR 120%+</li>
+        <li><span class="dot dot-blue"></span>등록 공급사 300개+ (공급사:건설사 비율 50:1 이상 유지)</li>
+        <li><span class="dot dot-blue"></span>월 GMV 10억 원+ (투자자 지표)</li>
+        <li><span class="dot dot-blue"></span>구독 + 수수료 하이브리드 + KODIT 금융 파일럿 완성</li>
+        <li><span class="dot dot-blue"></span>GPI Beta + Supplier Trust Score 가동 (데이터 해자 착공)</li>
+        <li><span class="dot dot-blue"></span>Series A 텀싯 1개 확보 · 조직 20명 규모</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <strong>공새로 (GONGSAERO)</strong> · 건설현장 스마트 조달 플랫폼<br>
+  <span style="margin-top:6px;display:inline-block">
+    90일 실천 전략 심화판 · Growth Hacker Agent + Scale-up Analyst Agent 분석 통합 · 2026년 5월 26일
+  </span>
+</footer>
+
+</body>
+</html>
