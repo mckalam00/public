@@ -11,7 +11,14 @@
     "skipLibCheck": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "lib": ["DOM", "ES2022"]
+    "lib": [
+      "DOM",
+      "ES2022"
+    ]
   },
-  "include": ["src", "remotion.config.ts"]
+  "include": [
+    "src",
+    "scripts",
+    "remotion.config.ts"
+  ]
 }

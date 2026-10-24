@@ -18,7 +18,7 @@ export const RequestPanel = () => {
   const frame = useCurrentFrame();
   const { request } = SOLUTION;
   const cursorMove = progress(frame, 22, 20);
-  const clickAt = 44;
+  const clickAt = request.clickFrame;
   const pressed = frame >= clickAt;
 
   return (

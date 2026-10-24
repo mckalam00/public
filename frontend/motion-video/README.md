@@ -19,12 +19,34 @@ Chrome 자동 다운로드가 막힌 서버(CI 등)에서는 로컬 Chromium hea
 REMOTION_BROWSER_EXECUTABLE=/path/to/chrome-headless-shell npm run render
 ```
 
+## 오디오 (배경음악 · 효과음 · 내레이션)
+
+```bash
+npm run audio            # public/audio/에 music.wav, sfx.wav, narration.wav 생성 (처음 1회 TTS 모델 자동 다운로드)
+npm run render           # 오디오 파일이 있으면 자동으로 포함
+```
+
+| 트랙 | 생성 | 내용 |
+|---|---|---|
+| 배경음악 `music.wav` | `scripts/audio/music.ts` (코드 합성, 라이선스 무관) | 0–10초 긴장감 펄스(Am) → S3에서 임팩트 후 밝은 C장조 그루브(105 BPM) → CTA 엔딩 코드 |
+| 효과음 `sfx.wav` | `scripts/audio/sfx.ts` | 휴대폰 진동, 흡입 whoosh, 로고 종소리, UI 클릭, CTA 팝. 시점은 `config/audio.ts`의 `SFX_CUES`가 화면 프레임에서 계산 |
+| 내레이션 `narration.wav` | `scripts/audio/narration.ts` | 문장별 합성 → 씬 길이에 맞춤 → 목소리 EQ·컴프레서 → −16 LUFS |
+
+- 내레이션 구간에서는 배경음악이 자동으로 낮아진다(덕킹, `MIX` 설정).
+- **기본 내레이션은 타이밍 확인용 가이드 음성**(오프라인 KSS 모델)이다. 발음이 부정확하므로 공개용은 성우·고품질 TTS 녹음으로 교체한다.
+  - 스크립트·디렉션·납품 규격: `docs/narration-script.md`
+  - 교체: `npm run audio:narration -- --from <녹음 폴더>` (`hook.wav` … `cta.wav`)
+- 필요 도구: `ffmpeg`(시스템 설치), `tar`. TTS 모델 경로는 `TTS_MODEL_DIR`로 바꿀 수 있다.
+- `sherpa-onnx-node`는 **1.x로 고정**한다. 2.x는 이 모델이 쓰는 발음 변환(espeak)을 제거했다.
+
 ## 구조
 
 | 경로 | 역할 |
 |---|---|
 | `src/config/content.ts` | **모든 카피·수치·씬 길이**. 소개서 페이지 번호 주석 포함. 수정은 대부분 여기서 끝난다 |
 | `src/config/theme.ts` | 색상·폰트·이징·해상도 토큰 |
+| `src/config/audio.ts` | 내레이션 스크립트, 목소리 설정, 믹스 볼륨, 효과음 큐 |
+| `scripts/audio/` | 배경음악·효과음 합성, 내레이션 생성(TS, `tsx`로 실행) |
 | `src/Video.tsx` | `SCENE_TIMINGS` 순서대로 씬을 `Series`로 연결, 폰트 로딩 |
 | `src/scenes/S1Hook.tsx` ~ `S8Cta.tsx` | 씬별 구현 (S4는 `scenes/solution/`에 패널 분리) |
 | `src/components/` | KineticText, CountUp, LogoMark, ChaosCard, DeviceFrame·Cursor·Badge, 아이콘 |
@@ -46,7 +68,7 @@ REMOTION_BROWSER_EXECUTABLE=/path/to/chrome-headless-shell npm run render
 - **수치 변경**: `content.ts`의 `METRICS`와 `METRICS_BASIS`(기준일)를 함께 바꾼다.
 - **씬 길이 변경**: `SCENE_TIMINGS`의 `seconds`만 바꾸면 전체 길이(`TOTAL_FRAMES`)가 자동 계산된다.
 - **30초 컷다운**: `SCENE_TIMINGS`에서 `problem`, `platform`을 빼면 34초. `solution`을 8초로 줄이면 30초.
-- **음악·내레이션 추가**: 파일을 `public/audio/`에 두고 `Video.tsx`의 `<Series>` 옆에 `<Audio src={staticFile("audio/파일명.mp3")} />`를 추가한다.
+- **내레이션 문장 수정**: `config/audio.ts`의 `NARRATION`에서 `text`(자막·검수용)와 `speech`(TTS 입력, 숫자는 한글로)를 함께 바꾸고 `npm run audio:narration`.
 
 ## 공개 전 확인 사항
 

@@ -1,6 +1,7 @@
 import type { ComponentType } from "react";
 import { useEffect, useState } from "react";
 import { AbsoluteFill, Series, cancelRender, continueRender, delayRender } from "remotion";
+import { AudioTracks } from "./components/AudioTracks";
 import { SCENE_TIMINGS, type SceneId, sceneFrames } from "./config/content";
 import { COLORS } from "./config/theme";
 import { loadBrandFonts } from "./lib/fonts";
@@ -39,6 +40,7 @@ export const GongsaeroVideo = () => {
 
   return (
     <AbsoluteFill style={{ background: COLORS.navy }}>
+      <AudioTracks />
       <Series>
         {SCENE_TIMINGS.map(({ id }) => {
           const Scene = SCENES[id];

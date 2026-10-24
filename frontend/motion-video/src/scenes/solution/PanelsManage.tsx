@@ -54,7 +54,7 @@ const SKELETON_ROWS = 4;
 export const SettlePanel = () => {
   const frame = useCurrentFrame();
   const { settle } = SOLUTION;
-  const clickAt = 36;
+  const clickAt = settle.clickFrame;
   const done = progress(frame, clickAt + 6, 12);
   const cursorMove = progress(frame, 12, 20);
 

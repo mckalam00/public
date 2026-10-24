@@ -36,6 +36,15 @@ export const sceneFrames = (id: SceneId): number => {
 
 export const TOTAL_FRAMES = SCENE_TIMINGS.reduce((sum, s) => sum + s.seconds * VIDEO.fps, 0);
 
+/** 영상 전체 기준으로 해당 씬이 시작되는 프레임 */
+export const sceneStartFrame = (id: SceneId): number => {
+  const index = SCENE_TIMINGS.findIndex((s) => s.id === id);
+  if (index < 0) {
+    throw new Error(`정의되지 않은 씬입니다: ${id}`);
+  }
+  return SCENE_TIMINGS.slice(0, index).reduce((sum, s) => sum + s.seconds * VIDEO.fps, 0);
+};
+
 // S1 Hook — p.1, p.7
 export const HOOK = {
   lines: ["전화 · 카톡 · 엑셀로 관리하던", "건설 현장 구매"],
@@ -74,6 +83,7 @@ export const SOLUTION = {
   steps: ["주문 요청", "비교 견적", "발주", "정산", "분석"],
   caption: "현장의 모든 조달 흐름을 하나의 화면에서",
   disclaimer: "화면은 이해를 돕기 위한 예시입니다",
+  timing: { introFrames: 18, slideFrames: 14 },
   request: {
     title: "간편 주문 요청",
     items: [
@@ -82,6 +92,7 @@ export const SOLUTION = {
       { name: "pp로프", spec: "5mm" },
     ],
     action: "견적 요청하기",
+    clickFrame: 44,
   },
   compare: {
     title: "실시간 자동 견적 비교",
@@ -109,6 +120,7 @@ export const SOLUTION = {
     selectedLabel: "선택된 정산서",
     pendingCount: 23,
     action: "정산시작",
+    clickFrame: 36,
   },
   analyze: {
     title: "데이터 축적 및 인사이트",
@@ -125,6 +137,14 @@ export const SOLUTION = {
     ],
   },
 } as const;
+
+/** S4에서 패널 하나가 머무는 프레임 수 */
+export const solutionStepFrames = (): number =>
+  Math.floor((sceneFrames("solution") - SOLUTION.timing.introFrames) / SOLUTION.steps.length);
+
+/** S4 안에서 i번째 패널이 들어오기 시작하는 프레임 (씬 기준) */
+export const solutionPanelStart = (index: number): number =>
+  index === 0 ? 0 : SOLUTION.timing.introFrames + index * solutionStepFrames() - SOLUTION.timing.slideFrames;
 
 // S5 Platform — p.10
 export const PLATFORM = {

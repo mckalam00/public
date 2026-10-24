@@ -3,12 +3,16 @@
   "version": "1.0.0",
   "private": true,
   "description": "공새로 45초 모션그래픽 영상 (Remotion)",
+  "type": "module",
   "scripts": {
     "postinstall": "node scripts/copy-fonts.mjs",
     "dev": "remotion studio",
     "render": "remotion render GongsaeroMain out/gongsaero-45s.mp4",
     "still": "remotion still GongsaeroMain out/still.png",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "audio:music": "tsx scripts/audio/build-music.ts",
+    "audio:narration": "tsx scripts/audio/narration.ts",
+    "audio": "npm run audio:music && npm run audio:narration"
   },
   "dependencies": {
     "@remotion/cli": "4.0.538",
@@ -19,7 +23,10 @@
     "remotion": "4.0.538"
   },
   "devDependencies": {
+    "@types/node": "22.20.5",
     "@types/react": "19.2.2",
+    "sherpa-onnx-node": "1.13.8",
+    "tsx": "4.23.15",
     "typescript": "5.9.3"
   }
 }
