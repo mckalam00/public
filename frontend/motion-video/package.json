@@ -12,7 +12,9 @@
     "typecheck": "tsc --noEmit",
     "audio:music": "tsx scripts/audio/build-music.ts",
     "audio:narration": "tsx scripts/audio/narration.ts",
-    "audio": "npm run audio:music && npm run audio:narration"
+    "audio": "npm run audio:music && npm run audio:narration",
+    "pages": "tsx scripts/pages/extract-pages.ts",
+    "render:brochure": "remotion render GongsaeroBrochure out/gongsaero-brochure.mp4"
   },
   "dependencies": {
     "@remotion/cli": "4.0.538",

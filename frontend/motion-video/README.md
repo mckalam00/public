@@ -19,6 +19,21 @@ Chrome 자동 다운로드가 막힌 서버(CI 등)에서는 로컬 Chromium hea
 REMOTION_BROWSER_EXECUTABLE=/path/to/chrome-headless-shell npm run render
 ```
 
+## 소개서 전체 영상 (20페이지, 약 3분 21초)
+
+소개서 PDF 20페이지를 순서대로 보여 주는 별도 영상(`GongsaeroBrochure`). 각 페이지는 전체 화면으로 시작해 제목 → 핵심 영역 순으로 카메라가 확대·이동하고, 페이지 사이는 크로스페이드로 넘어간다. 내레이션 없이 배경음악만 들어간다.
+
+```bash
+npm run pages -- --pdf <소개서.pdf>   # public/pages/page-01.jpg … (가로 5000px, 커밋하지 않음)
+npm run audio:music                   # public/audio/brochure-music.wav (−16 LUFS)
+npm run render:brochure               # out/gongsaero-brochure.mp4
+```
+
+- 페이지별 섹션·제목·확대 영역·정지 시간: `src/config/brochure.ts`의 `BROCHURE_PAGES`. 영역은 페이지를 가로 2000px로 봤을 때의 픽셀 좌표다.
+- 속도 조절: `BROCHURE_TIMING`(전체 보기, 이동, 정지, 전환 시간). 영상 길이와 배경음악 길이는 자동으로 다시 계산된다.
+- 소개서가 바뀌면 PDF 페이지 수와 `BROCHURE_PAGES` 개수가 같아야 한다(다르면 `npm run pages`가 멈춘다). 레이아웃이 바뀐 페이지는 영역 좌표를 다시 잡는다.
+- 소개서 이미지(고객사 로고·사진·QR 포함)는 공개 저장소에 올리지 않도록 `public/pages/`를 `.gitignore`에 넣었다.
+
 ## 오디오 (배경음악 · 효과음 · 내레이션)
 
 ```bash
@@ -46,6 +61,9 @@ npm run render           # 오디오 파일이 있으면 자동으로 포함
 | `src/config/content.ts` | **모든 카피·수치·씬 길이**. 소개서 페이지 번호 주석 포함. 수정은 대부분 여기서 끝난다 |
 | `src/config/theme.ts` | 색상·폰트·이징·해상도 토큰 |
 | `src/config/audio.ts` | 내레이션 스크립트, 목소리 설정, 믹스 볼륨, 효과음 큐 |
+| `src/config/brochure.ts` | 소개서 영상: 페이지별 확대 영역·타이밍 |
+| `src/brochure/`, `src/lib/camera.ts` | 소개서 영상 컴포지션과 카메라(확대·이동) 계산 |
+| `scripts/pages/` | PDF → 페이지 이미지 변환(`pdftoppm`) |
 | `scripts/audio/` | 배경음악·효과음 합성, 내레이션 생성(TS, `tsx`로 실행) |
 | `src/Video.tsx` | `SCENE_TIMINGS` 순서대로 씬을 `Series`로 연결, 폰트 로딩 |
 | `src/scenes/S1Hook.tsx` ~ `S8Cta.tsx` | 씬별 구현 (S4는 `scenes/solution/`에 패널 분리) |
