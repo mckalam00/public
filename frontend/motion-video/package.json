@@ -1,0 +1,25 @@
+{
+  "name": "gongsaero-motion-video",
+  "version": "1.0.0",
+  "private": true,
+  "description": "공새로 45초 모션그래픽 영상 (Remotion)",
+  "scripts": {
+    "postinstall": "node scripts/copy-fonts.mjs",
+    "dev": "remotion studio",
+    "render": "remotion render GongsaeroMain out/gongsaero-45s.mp4",
+    "still": "remotion still GongsaeroMain out/still.png",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.538",
+    "@remotion/fonts": "4.0.538",
+    "pretendard": "1.3.9",
+    "react": "19.2.0",
+    "react-dom": "19.2.0",
+    "remotion": "4.0.538"
+  },
+  "devDependencies": {
+    "@types/react": "19.2.2",
+    "typescript": "5.9.3"
+  }
+}
