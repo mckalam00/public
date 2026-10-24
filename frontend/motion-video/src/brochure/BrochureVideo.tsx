@@ -22,6 +22,7 @@ import {
 import { COLORS, FONT_FAMILY, VIDEO } from "../config/theme";
 import { loadBrandFonts } from "../lib/fonts";
 import { BrochurePage } from "./BrochurePage";
+import { useBrochureLayout } from "./layout";
 
 const MUSIC_FADE = { inSec: 1, outSec: 3 } as const;
 // 음량은 build-music.ts에서 −16 LUFS로 맞춰 두었다
@@ -87,15 +88,28 @@ export const BrochureVideo = () => {
   }, [handle]);
 
   const hasMusic = getStaticFiles().some((file) => file.name === BROCHURE_MUSIC_FILE);
+  const layout = useBrochureLayout();
+  if (!layout) return null;
 
   return (
     <AbsoluteFill style={{ background: COLORS.navyDeep }}>
       {hasMusic ? <Audio src={staticFile(BROCHURE_MUSIC_FILE)} volume={musicVolume} /> : null}
       {BROCHURE_PAGES.map((page, i) => {
         const isLast = i === BROCHURE_PAGES.length - 1;
+        const pageLayout = layout.pages.find((p) => p.page === page.page);
+        if (!pageLayout) {
+          throw new Error(`layout.json에 ${page.page}페이지가 없습니다. npm run pages를 다시 실행하세요.`);
+        }
         return (
           <Sequence key={page.page} from={pageStarts[i]} durationInFrames={pageFrames(page, isLast)} name={`p${page.page} ${page.title}`}>
-            <BrochurePage page={page} isFirst={i === 0} isLast={isLast} />
+            <BrochurePage
+              page={page}
+              layout={pageLayout}
+              refWidth={layout.refWidth}
+              refHeight={layout.refHeight}
+              isFirst={i === 0}
+              isLast={isLast}
+            />
           </Sequence>
         );
       })}
